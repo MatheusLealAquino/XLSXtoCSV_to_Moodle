@@ -1,10 +1,10 @@
 # Convert Excel XLSX file to CSV for student enrollment in Moodle
 
+<b> #English </b>
+
 Done with Python 3.4, Tkinter and XLRD.
 
 Link to download XLRD: https://pypi.python.org/pypi/xlrd
-
-<b> #English </b>
 
 Convert Excel XLSX file to CSV for student enrollment in Moodle.
 
@@ -24,6 +24,7 @@ For this application to work, you need to install XLRD for Python.
 <hr>
 
 <b> #Portuguese </b>
+
 Feito com Python 3.4, Tkinter e XLRD.
 
 Link para download XLRD: https://pypi.python.org/pypi/xlrd
