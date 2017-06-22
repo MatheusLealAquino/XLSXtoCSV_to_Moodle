@@ -24,6 +24,9 @@ For this application to work, you need to install XLRD for Python.
 <hr>
 
 <b> #Portuguese </b>
+Feito com Python 3.4, Tkinter e XLRD.
+
+Link para download XLRD: https://pypi.python.org/pypi/xlrd
 
 Converter arquivo Excel XLSX para CSV para cadastro de alunos no Moodle
 
