@@ -27,7 +27,7 @@ def divideNome(nome):
 def escrever(arquivo,dados):
         with open(arquivo+'.csv', 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            parametros = ['USERNAME;','PASSWORD;','FIRSTNAME;','LASTNAME;','EMAIL;','COURSE1;','GROUP1;','TYPE1']
+            parametros = ['USERNAME;','PASSWORD;','FIRSTNAME;','LASTNAME;','EMAIL;','COURSE1;','GROUP1;']
             lista = []
             lista.append(dados)
             print(lista)
@@ -62,7 +62,7 @@ def ler(arquivo_abrir,arquivo_dest,curso):
                 password = 'Changeme2017;'
                 
                 if i == (len(parametros)-1):
-                    string += username + password + firstname + lastname + email + curso + ';' + ';' + 'student\n'
+                    string += username + password + firstname + lastname + email + curso + ';' + ';' + '\n'
                     #segundo ; é para o grupo
                     escrever(arquivo_dest,string)
                 
