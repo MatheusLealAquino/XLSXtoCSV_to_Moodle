@@ -1,5 +1,6 @@
 # Convert Excel XLSX file to CSV for student enrollment in Moodle
 
+Link to download XLRD: https://pypi.python.org/pypi/xlrd
 
 <b> #English </b>
 
