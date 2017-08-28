@@ -1,7 +1,7 @@
 from tkinter import *
 import csv
 import xlrd
-                                                                #Done by Matheus Leal
+
 #dividir em firstname e lastname
 def divideNome(nome):
         cont = 0
@@ -27,7 +27,7 @@ def divideNome(nome):
 def escrever(arquivo,dados):
         with open(arquivo+'.csv', 'w', newline='') as csvfile:
             spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            parametros = ['USERNAME;','PASSWORD;','FIRSTNAME;','LASTNAME;','EMAIL;','COURSE1;','GROUP1;']
+            parametros = ['username;','password;','firstname;','lastname;','email;','course1;','group1;']
             lista = []
             lista.append(dados)
             print(lista)
@@ -51,31 +51,37 @@ def ler(arquivo_abrir,arquivo_dest,curso):
                 if parametros[i] == 'cpf' or parametros[i] == 'CPF':
                     username = str(int(sheet.cell_value(cont, i))) +';'
                 
-                if parametros[i] == 'nome' or parametros[i] == 'estudante' or parametros[i] == 'Nome do Aluno' or parametros[i] == 'Nome Aluno':
+                if parametros[i] == 'nome' or parametros[i] == 'estudante' or parametros[i] == 'Nome do Aluno' or parametros[i] == 'Nome Aluno' or parametros[i] == 'Nome':
                         nome = divideNome(sheet.cell_value(cont, i))
                         firstname = nome[0]
                         lastname = nome[1]
                
-                if parametros[i] == 'email' or parametros[i] == 'E-mail':
+                if parametros[i] == 'email' or parametros[i] == 'E-mail' or parametros[i] == 'Email Aluno':
                     email = sheet.cell_value(cont, i) +';'
                     
-                password = 'Changeme2017;'
+                password = 'Cead2017;'
                 
                 if i == (len(parametros)-1):
-                    string += username + password + firstname + lastname + email + curso + ';' + ';' + '\n'
+                    '''dados.append(username)
+                    dados.append(password)
+                    dados.append(firstname)
+                    dados.append(lastname)
+                    dados.append(email)
+                    dados.append('cc;') #curso
+                    dados.append(';')   #grupo
+                    dados.append("tutor;") #tipo de cadastro'''
+                    string += username + password + firstname + lastname + email + curso + ';' + ';\n' # + 'student\n'
                     #segundo ; é para o grupo
                     escrever(arquivo_dest,string)
                 
             if sheet.nrows > 2: #se linha maior que 2
                  cont +=1
+                 #dados.append(';\n')
             else:
                 break
 
 class Janela:
     def __init__(self,top):
-        self.frame11 = Frame(top)
-        self.frame11.pack()
-        
         self.frame0 = Frame(top)
         self.frame0.pack()
 
@@ -87,9 +93,6 @@ class Janela:
         
         self.frame3 = Frame(top)
         self.frame3.pack()
-
-        self.inicioLabel = Label(self.frame11,text='Feito por Matheus Leal', font=('Arial',12))
-        self.inicioLabel.pack()
 
         self.entradaLabel = Label(self.frame0,text='Nome do arquivo de entrada: ',font=('Arial',12))
         self.entradaLabel.pack(side=LEFT)
@@ -134,6 +137,6 @@ class Janela:
 
         
 raiz = Tk()
-raiz.title('Cadastro Moodle - CSV 1.0')
+raiz.title('CEAD - CSV 1.0')
 Janela(raiz)
 raiz.mainloop()
