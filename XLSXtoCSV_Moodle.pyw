@@ -18,20 +18,29 @@ def divideNome(nome):
                 if cont == 0:
                     firstname+=';'
                 cont+=1
+                
             if i == (len(nome)-1):
                 lastname+=';'
                 
+        lastname = lastname.title()
+        lastname = lastname.split('  ')
+        firstname = firstname.capitalize()
+        
         return firstname,lastname
 
 #escrever dados
 def escrever(arquivo,dados):
         with open(arquivo+'.csv', 'w', newline='') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            parametros = ['username;','password;','firstname;','lastname;','email;','course1;','group1;']
+            spamwriter = csv.writer(csvfile, delimiter=' ', quotechar=' ') #quoting=csv.QUOTE_MINIMAL
+            string = "username;"+"password;"+"firstname;"+"lastname;"+"email;"+"course1;"+"group1;"
+            
+            lista1 = []
+            lista1.append(string)
+            
             lista = []
             lista.append(dados)
-            print(lista)
-            spamwriter.writerow(parametros)
+
+            spamwriter.writerow(lista1)
             spamwriter.writerow(lista)
 
 #ler dados
@@ -42,6 +51,7 @@ def ler(arquivo_abrir,arquivo_dest,curso):
         dados = []
         string = ""
         cont = 1
+        grupo = ';'
         
         for i in range(sheet.ncols): #numero de colunas
             parametros.append(sheet.cell_value(0, i))
@@ -51,26 +61,23 @@ def ler(arquivo_abrir,arquivo_dest,curso):
                 if parametros[i] == 'cpf' or parametros[i] == 'CPF':
                     username = str(int(sheet.cell_value(cont, i))) +';'
                 
-                if parametros[i] == 'nome' or parametros[i] == 'estudante' or parametros[i] == 'Nome do Aluno' or parametros[i] == 'Nome Aluno' or parametros[i] == 'Nome':
+                if parametros[i] == 'nome' or parametros[i] == 'estudante' or parametros[i] == 'Nome do Aluno' or parametros[i] == 'Nome Aluno' or parametros[i] == 'Nome completo':
                         nome = divideNome(sheet.cell_value(cont, i))
                         firstname = nome[0]
-                        lastname = nome[1]
+                        lastname = nome[1][0]
+                        print(lastname)
                
-                if parametros[i] == 'email' or parametros[i] == 'E-mail' or parametros[i] == 'Email Aluno':
+                if parametros[i] == 'email' or parametros[i] == 'E-mail' or parametros[i] == 'Email Aluno' or parametros[i] == 'e-mail':
                     email = sheet.cell_value(cont, i) +';'
+                    email = email.lower()
+
+                if parametros[i] == 'Código Turma':
+                        grupo = sheet.cell_value(cont, i)+';'
                     
                 password = 'Cead2017;'
                 
                 if i == (len(parametros)-1):
-                    '''dados.append(username)
-                    dados.append(password)
-                    dados.append(firstname)
-                    dados.append(lastname)
-                    dados.append(email)
-                    dados.append('cc;') #curso
-                    dados.append(';')   #grupo
-                    dados.append("tutor;") #tipo de cadastro'''
-                    string += username + password + firstname + lastname + email + curso + ';' + ';\n' # + 'student\n'
+                    string += username + password + firstname + lastname + email + curso+ ';' + grupo + ';\n' # + 'student\n'
                     #segundo ; é para o grupo
                     escrever(arquivo_dest,string)
                 
