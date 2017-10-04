@@ -31,7 +31,7 @@ def divideNome(nome):
 #escrever dados
 def escrever(arquivo,dados):
         with open(arquivo+'.csv', 'w', newline='') as csvfile:
-            spamwriter = csv.writer(csvfile, delimiter=' ', quotechar=' ') #quoting=csv.QUOTE_MINIMAL
+            spamwriter = csv.writer(csvfile, delimiter=' ', quotechar=' ')
             string = "username;"+"password;"+"firstname;"+"lastname;"+"email;"+"course1;"+"group1;"
             
             lista1 = []
@@ -74,16 +74,14 @@ def ler(arquivo_abrir,arquivo_dest,curso):
                 if parametros[i] == 'Código Turma':
                         grupo = sheet.cell_value(cont, i)+';'
                     
-                password = 'Cead2017;'
+                password = 'Senha;'
                 
                 if i == (len(parametros)-1):
-                    string += username + password + firstname + lastname + email + curso+ ';' + grupo + ';\n' # + 'student\n'
-                    #segundo ; é para o grupo
+                    string += username + password + firstname + lastname + email + curso+ ';' + grupo + ';\n'
                     escrever(arquivo_dest,string)
                 
             if sheet.nrows > 2: #se linha maior que 2
                  cont +=1
-                 #dados.append(';\n')
             else:
                 break
 
